@@ -158,29 +158,29 @@ namespace BlogCore.Areas.Identity.Pages.Account
                 {
 
                     //Aquí validamos si los roles existen sino se crean
-                    if (!await _roleManager.RoleExistsAsync(CNT.Admin))
+                    if (!await _roleManager.RoleExistsAsync(Constants.Admin))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(CNT.Admin));
-                        await _roleManager.CreateAsync(new IdentityRole(CNT.Usuario));
+                        await _roleManager.CreateAsync(new IdentityRole(Constants.Admin));
+                        await _roleManager.CreateAsync(new IdentityRole(Constants.Usuario));
                     }
 
                     //Obtenemos el rol seleccionado
                     string rol = Request.Form["radUsuarioRole"].ToString();
 
                     //Validamos si el rol seleccionado es Admin y si lo es lo agregamos
-                    if (rol == CNT.Admin)
+                    if (rol == Constants.Admin)
                     {
-                        await _userManager.AddToRoleAsync(user, CNT.Admin);
+                        await _userManager.AddToRoleAsync(user, Constants.Admin);
                     }
                     else
                     {
-                        if (rol == CNT.Usuario)
+                        if (rol == Constants.Usuario)
                         {
-                            await _userManager.AddToRoleAsync(user, CNT.Usuario);
+                            await _userManager.AddToRoleAsync(user, Constants.Usuario);
                         }
                         else
                         {
-                            await _userManager.AddToRoleAsync(user, CNT.Usuario);
+                            await _userManager.AddToRoleAsync(user, Constants.Usuario);
                         }
                     }
 
