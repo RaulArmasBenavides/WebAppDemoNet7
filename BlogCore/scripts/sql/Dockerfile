@@ -1,11 +1,17 @@
 # We choose exact tag (not 'latest'), to be sure that new version wont break creating image
 FROM mcr.microsoft.com/mssql/server:2022-latest
 
+# Set environment variables
+ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=P@ssw0rd?
+
 # Create app directory
 WORKDIR /usr/src/app
 
-# Copy initialization scripts
-COPY . /usr/src/app
+# Copy the setup script and database backup
+COPY setup.sql /usr/src/app
+COPY CONSULTORIO2.bak /usr/src/app
+COPY restore-db.sh /usr/src/app
 
 # Expose port 1433 in case accesing from other container
 EXPOSE 1433

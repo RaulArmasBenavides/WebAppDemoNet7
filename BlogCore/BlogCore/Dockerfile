@@ -17,14 +17,14 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
+WORKDIR /BlogCore
 COPY ["BlogCore/BlogCore.csproj", "BlogCore/"]
-COPY ["BlogCore.AccesoDatos/BlogCore.AccesoDatos.csproj", "BlogCore.AccesoDatos/"]
-COPY ["BlogCore.Models/BlogCore.Models.csproj", "BlogCore.Models/"]
-COPY ["BlogCore.Utilidades/BlogCore.Utilidades.csproj", "BlogCore.Utilidades/"]
+COPY ["BlogCore/BlogCore.AccesoDatos/BlogCore.AccesoDatos.csproj", "BlogCore/BlogCore.AccesoDatos/"]
+COPY ["BlogCore/BlogCore.Models/BlogCore.Models.csproj", "BlogCore/BlogCore.Models/"]
+COPY ["BlogCore/BlogCore.Utilidades/BlogCore.Utilidades.csproj", "BlogCore/BlogCore.Utilidades/"]
 RUN dotnet restore "./BlogCore/./BlogCore.csproj"
 COPY . .
-WORKDIR "/src/BlogCore"
+WORKDIR "/BlogCore/BlogCore"
 RUN dotnet build "./BlogCore.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
